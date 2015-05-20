@@ -128,7 +128,16 @@ class Listener(asyncore.dispatcher):
 
     # callbacks you override
     def on_accept(self, h):
-        pass
+        print 'user connected'
+        h.do_send('agent has been connected\n')
+        self.chat(h)
+
+    def chat(self,h):
+        while 1:
+            poll(timeout=3)
+            to_send = raw_input("send back: ")
+            h.do_send("Agent: " + to_send + "\n")
+                
     
     
 def poll(timeout=0):
