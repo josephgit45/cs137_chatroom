@@ -1,4 +1,4 @@
-from network import Handler, poll
+from network import Handler, poll, Listener
 import sys
 from threading import Thread
 from time import sleep
@@ -17,7 +17,7 @@ class Client(Handler):
 host, port = 'localhost', 8888
 client = Client(host, port)
 client.do_send({'join': myname})
-
+client.found_terminator()
 def periodic_poll():
     while 1:
         poll()
@@ -30,3 +30,4 @@ thread.start()
 while 1:
     mytxt = sys.stdin.readline().rstrip()
     client.do_send({'speak': myname, 'txt': mytxt})
+    client.found_terminator()
