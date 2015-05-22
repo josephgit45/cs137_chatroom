@@ -120,23 +120,25 @@ class Listener(asyncore.dispatcher):
             sock, (host, port) = accept_result
             h = self.handler_class(host, port, sock)
             self.on_accept(h)
-            h.on_open()
-    
+            #h.on_open()
+
     # API you can use
     def stop(self):
         self.close()
 
     # callbacks you override
     def on_accept(self, h):
+        #add queue later
         print 'user connected'
         h.do_send('agent has been connected\n')
         self.chat(h)
 
     def chat(self,h):
         while 1:
-            poll(timeout=3)
+            poll(timeout=0.05)
             to_send = raw_input("send back: ")
-            h.do_send("Agent: " + to_send + "\n")
+            if(to_send is not ""):
+                h.do_send("Agent: " + to_send + "\n")
                 
     
     

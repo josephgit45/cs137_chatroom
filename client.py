@@ -5,6 +5,7 @@ from time import sleep
 
 
 myname = raw_input('What is your name? ')
+options = raw_input('What do you need help with? 1) Question, 2) Complaint, 3) Return \n')
 
 class Client(Handler):
     
@@ -16,7 +17,7 @@ class Client(Handler):
         
 host, port = 'localhost', 8888
 client = Client(host, port)
-client.do_send({'join': myname})
+client.do_send({'join': myname, 'option': options})
 
 
 def periodic_poll():
@@ -34,6 +35,7 @@ while 1:
         client.found_terminator()
     except:
         pass
-    to_send = raw_input("send back: ")
-    client.do_send("User: " + to_send + "\n")
+    to_send = raw_input("")
+    if(to_send is not ""):
+        client.do_send("User: " + to_send + "\n")
 

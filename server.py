@@ -14,7 +14,7 @@ class MyHandler(Handler):
      
     def on_msg(self, msg):
         print msg
- 
+
 port = 8888
 server = Listener(port, MyHandler)
 
