@@ -2,6 +2,7 @@ from network import Listener, Handler, poll
 import asyncore
  
 handlers = {}  # map client handler to user name
+clients = set()
  
 class MyHandler(Handler):
      
@@ -12,27 +13,21 @@ class MyHandler(Handler):
         pass
      
     def on_msg(self, msg):
-        print msg
+        for c in clients:
+            if c is not self:
+                c.do_send(msg)
 
 class MyListener(Listener):
 
     def on_accept(self, h):
-        #add queue later
         print 'user connected'
+        clients.add(h)
         h.do_send('agent has been connected\n')
-        self.chat(h)
-    
-    def chat(self,h):
-        while 1:
-            poll(timeout=0.05)
-            to_send = raw_input("send back: ")
-            if(to_send is not ""):
-                h.do_send("Agent: " + to_send + "\n")
 
 port = 8888
 server = MyListener(port, MyHandler)
 
 while 1:
-    #poll(timeout=0.05) # in seconds
-    server.handle_accept()
+    poll(timeout=0.05) # in seconds
+#server.handle_accept()
 
