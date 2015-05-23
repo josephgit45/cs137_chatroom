@@ -13,7 +13,10 @@ class Client(Handler):
         pass
     
     def on_msg(self, msg):
-        print msg
+        if 'join' in msg:
+            print msg['join'] + " has joined."
+        else:
+            print msg['speak'] + " said: " + msg['txt']
         
 host, port = 'localhost', 8888
 client = Client(host, port)

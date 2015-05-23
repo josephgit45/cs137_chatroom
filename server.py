@@ -22,7 +22,6 @@ class MyListener(Listener):
     def on_accept(self, h):
         print 'user connected'
         clients.add(h)
-        h.do_send('agent has been connected\n')
 
 port = 8888
 server = MyListener(port, MyHandler)
