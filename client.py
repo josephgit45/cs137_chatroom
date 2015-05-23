@@ -28,7 +28,6 @@ def periodic_poll():
 thread = Thread(target=periodic_poll, name = "client_thread")
 thread.daemon = True  # die when the main thread dies 
 thread.start()
-#thread.run()
 
 while 1:   
     try:
