@@ -16,10 +16,17 @@ class MyHandler(Handler):
         for c in clients:
             if c is not self:
                 c.do_send(msg)
+            elif 'quit' in msg.keys() and c is self:
+                print msg['speak'] + " user left."
+                clients.remove(c)
+                break
 
 class MyListener(Listener):
 
     def on_accept(self, h):
+        if len(clients) >= 2:
+            while len(clients) >= 2:
+                poll(timeout=0.1)
         print 'user connected'
         clients.add(h)
 
