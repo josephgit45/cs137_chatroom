@@ -63,10 +63,10 @@ class Handler(asynchat.async_chat):
             self.connect((host, port))  # asynchronous and non-blocking
         self.set_terminator('\0')
         self._buffer = []
-        
+    
     def collect_incoming_data(self, data):
         self._buffer.append(data)
-
+    
     def found_terminator(self):
         msg = self.decode(''.join(self._buffer))
         self._buffer = []
@@ -75,14 +75,14 @@ class Handler(asynchat.async_chat):
     def handle_close(self):
         self.close()
         self.on_close()
-
+    
     def handle_connect(self):  # called on the active side
         self.on_open()
-        
+    
     # API you can use
     def do_send(self, msg):
         self.push(self.encode(msg) + '\0')
-        
+    
     def do_close(self):
         self.handle_close()  # will call self.on_close
     
@@ -97,14 +97,14 @@ class Handler(asynchat.async_chat):
     # callbacks you should override
     def on_open(self):
         pass
-        
+    
     def on_close(self):
         pass
-        
+    
     def on_msg(self, data):
         pass
-    
-    
+
+
 class Listener(asyncore.dispatcher):
     
     def __init__(self, port, handler_class):
@@ -113,7 +113,7 @@ class Listener(asyncore.dispatcher):
         self.create_socket(socket.AF_INET, socket.SOCK_STREAM)  # TCP
         self.bind(('', port))
         self.listen(5)  # max 5 incoming connections at once (Windows' limit)
-
+    
     def handle_accept(self):  # called on the passive side
         accept_result = self.accept()
         if accept_result:  # None if connection blocked or aborted
@@ -125,21 +125,12 @@ class Listener(asyncore.dispatcher):
     # API you can use
     def stop(self):
         self.close()
-
+    
     # callbacks you override
     def on_accept(self, h):
-        print 'user connected'
-        h.do_send('agent has been connected\n')
-        self.chat(h)
+        pass
 
-    def chat(self,h):
-        while 1:
-            poll(timeout=3)
-            to_send = raw_input("send back: ")
-            h.do_send("Agent: " + to_send + "\n")
-                
-    
-    
+
 def poll(timeout=0):
     asyncore.loop(timeout=timeout, count=1)  # return right away
 
@@ -153,8 +144,8 @@ def poll_for(duration):  # in seconds
 
 def get_my_ip():
     """ Get my network interface's IP, not localhost's IP.
-    From http://stackoverflow.com/a/1947766/856897
-    """
+        From http://stackoverflow.com/a/1947766/856897
+        """
     ip = socket.gethostbyname(socket.gethostname())
     # Some versions of Ubuntu may return 127.0.0.1
     if os.name != "nt" and ip.startswith("127."):
@@ -174,7 +165,5 @@ def get_my_ip():
                 pass
     return ip
 
-
-                
 if __name__ == '__main__':
     print get_my_ip()

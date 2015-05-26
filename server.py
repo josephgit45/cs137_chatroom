@@ -1,8 +1,8 @@
 from network import Listener, Handler, poll
 import asyncore
-
  
 handlers = {}  # map client handler to user name
+clients = set()
  
 class MyHandler(Handler):
      
@@ -13,12 +13,27 @@ class MyHandler(Handler):
         pass
      
     def on_msg(self, msg):
-        print msg
- 
+        for c in clients:
+            if c is not self:
+                c.do_send(msg)
+            elif 'quit' in msg.keys() and c is self:
+                print msg['speak'] + " user left."
+                clients.remove(c)
+                break
+
+class MyListener(Listener):
+
+    def on_accept(self, h):
+        if len(clients) >= 2:
+            while len(clients) >= 2:
+                poll(timeout=0.1)
+        print 'user connected'
+        clients.add(h)
+
 port = 8888
-server = Listener(port, MyHandler)
+server = MyListener(port, MyHandler)
 
 while 1:
-    #poll(timeout=0.05) # in seconds
-    server.handle_accept()
+    poll(timeout=0.05) # in seconds
+#server.handle_accept()
 
