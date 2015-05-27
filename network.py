@@ -64,6 +64,7 @@ class Handler(asynchat.async_chat):
             self.connect((host, port))  # asynchronous and non-blocking
         self.set_terminator('\0')
         self._buffer = []
+        self.log = ""
     
     def collect_incoming_data(self, data):
         self._buffer.append(data)

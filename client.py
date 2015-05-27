@@ -11,8 +11,10 @@ class Client(Handler):
     
     def on_msg(self, msg):
         if 'join' in msg:
+            self.log += "Agent " + msg['join'] + " has joined.\n"
             print "Agent " + msg['join'] + " has joined."
         else:
+            self.log += "Agent " + msg['speak'] + " said: " + msg['txt'] + "\n"
             print "Agent " + msg['speak'] + " said: " + msg['txt']
         
 host, port = 'localhost', 8888
@@ -32,12 +34,17 @@ thread.start()
 
 while 1:
     to_send = sys.stdin.readline().rstrip()
+    client.log += "Client said: " + to_send + "\n"
     if(to_send==":q"):
         client.do_send({'speak': myname, 'quit': to_send})
         print "Goodbye."
         client.do_close()
     elif(to_send==":s"):
-        print "save"
+        print "Saving to log.txt file"
+        logFile = open("log.txt", "w+")
+        logFile.write("CHAT LOG:\n")
+        logFile.write(client.log)
+        logFile.close()
     elif(to_send==":e"):
         print "easter egg!"
     else:
