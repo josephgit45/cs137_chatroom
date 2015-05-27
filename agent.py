@@ -13,7 +13,7 @@ class Client(Handler):
     
     def on_msg(self, msg):
         if 'join' in msg:
-            print "User " + msg['join'] + " has joined."
+            print "User " + msg['join'] + " has joined, needs help with " + msg['option'] + "."
         elif 'txt' in msg:
             print "User " + msg['speak'] + " said: " + msg['txt']
         elif 'quit' in msg:

@@ -9,9 +9,6 @@ options = raw_input('What do you need help with? 1) Question, 2) Complaint, 3) R
 
 class Client(Handler):
     
-    def on_close(self):
-        print "Goodbye."
-    
     def on_msg(self, msg):
         if 'join' in msg:
             print "Agent " + msg['join'] + " has joined."
@@ -20,8 +17,8 @@ class Client(Handler):
         
 host, port = 'localhost', 8888
 client = Client(host, port)
-while not client.connected:  # poll until connected
-    poll(timeout=0.1)
+    #while not client.connected:  # poll until connected
+#poll(timeout=0.1)
 client.do_send({'join': myname, 'option': options})
 
 def periodic_poll():
@@ -37,6 +34,7 @@ while 1:
     to_send = sys.stdin.readline().rstrip()
     if(to_send==":q"):
         client.do_send({'speak': myname, 'quit': to_send})
+        print "Goodbye."
         client.do_close()
     elif(to_send==":s"):
         print "save"

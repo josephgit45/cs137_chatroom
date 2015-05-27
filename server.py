@@ -24,9 +24,9 @@ class MyHandler(Handler):
 class MyListener(Listener):
 
     def on_accept(self, h):
-        if len(clients) >= 2:
-            while len(clients) >= 2:
-                poll(timeout=0.1)
+        #if len(clients) >= 2:
+        #    while len(clients) >= 2:
+        #        poll(timeout=0.1)
         print 'user connected'
         clients.add(h)
 

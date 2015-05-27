@@ -51,6 +51,7 @@ import os
 import socket
 import time
 
+clients = set()
 
 class Handler(asynchat.async_chat):
     
@@ -99,7 +100,7 @@ class Handler(asynchat.async_chat):
         pass
     
     def on_close(self):
-        pass
+        clients.remove(self)
     
     def on_msg(self, data):
         pass
@@ -115,10 +116,15 @@ class Listener(asyncore.dispatcher):
         self.listen(5)  # max 5 incoming connections at once (Windows' limit)
     
     def handle_accept(self):  # called on the passive side
+        if len(clients) >= 2:
+            while len(clients) >= 2:
+                print "loop"
+                poll(timeout=0.1)
         accept_result = self.accept()
         if accept_result:  # None if connection blocked or aborted
             sock, (host, port) = accept_result
             h = self.handler_class(host, port, sock)
+            clients.add(h)
             self.on_accept(h)
             h.on_open()
     
