@@ -17,10 +17,10 @@ class Client(Handler):
             self.log += "Agent " + msg['speak'] + " said: " + msg['txt'] + "\n"
             print "Agent " + msg['speak'] + " said: " + msg['txt']
         
-host, port = 'localhost', 8888
+host, port = '172.20.10.4', 8888
 client = Client(host, port)
     #while not client.connected:  # poll until connected
-#poll(timeout=0.1)
+#    sleep(0.05)
 client.do_send({'join': myname, 'option': options})
 
 def periodic_poll():
