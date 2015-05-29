@@ -46,7 +46,13 @@ while 1:
         logFile.write(client.log)
         logFile.close()
     elif(to_send==":e"):
-        print "easter egg!"
+        print"      ___ "
+        print"   .-*)) `*-."
+        print"  /*  ((*   *'."
+        print" |   *))  *   *\ "
+        print" | *  ((*   *  /"
+        print"  \  *))  *  .'"
+        print"   '-.((*_.-'"
     else:
         client.do_send({'speak': myname, 'txt': to_send})
 
