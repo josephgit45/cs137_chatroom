@@ -13,6 +13,8 @@ elif options == 2:
 else:
     topic = raw_input('What would you like to return? ')
 
+print "Connecting you to an agent."
+
 class Client(Handler):
     
     def on_msg(self, msg):
