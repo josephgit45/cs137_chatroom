@@ -13,9 +13,11 @@ class Client(Handler):
         if 'join' in msg:
             self.log += "Agent " + msg['join'] + " has joined.\n"
             print "Agent " + msg['join'] + " has joined."
-        else:
+        elif 'txt' in msg:
             self.log += "Agent " + msg['speak'] + " said: " + msg['txt'] + "\n"
             print "Agent " + msg['speak'] + " said: " + msg['txt']
+        else:
+            print "Agent is busy. Please wait."
         
 host, port = '192.168.43.103', 8888
 client = Client(host, port)

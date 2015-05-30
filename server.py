@@ -22,13 +22,12 @@ class MyHandler(Handler):
                     print msg['speak'] + " user left."
                     clients.remove(c)
                     break
+        else:
+            self.do_send({'busy': "Please wait."})
 
 class MyListener(Listener):
 
     def on_accept(self, h):
-        #if len(clients) >= 2:
-        #    while len(clients) >= 2:
-        #        poll(timeout=0.1)
         print 'user connected'
         clients.append(h)
 
