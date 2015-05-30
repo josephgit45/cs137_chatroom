@@ -6,9 +6,9 @@ from time import sleep
 ########MODEL########
 myname = raw_input('What is your name? ')
 options = raw_input('What do you need help with? 1) Question, 2) Complaint, 3) Return \n')
-if options == 1:
+if options == "1":
     topic = raw_input('What is your question? ')
-elif options == 2:
+elif options == "2":
     topic = raw_input('What is the complaint? ')
 else:
     topic = raw_input('What would you like to return? ')
