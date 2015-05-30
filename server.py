@@ -35,6 +35,7 @@ class MyListener(Listener):
 
 port = 8888
 server = MyListener(port, MyHandler)
+print "server is running..."
 
 while 1:
     poll(timeout=0.05) # in seconds

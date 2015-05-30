@@ -64,6 +64,14 @@ while 1:
         print" | *  ((*   *  /"
         print"  \  *))  *  .'"
         print"   '-.((*_.-'"
+
+        client.log +="      ___ \n"
+        client.log +="   .-*)) `*-.\n"
+        client.log +="  /*  ((*   *'.\n"
+        client.log +=" |   *))  *   *\ \n"
+        client.log +=" | *  ((*   *  /\n"
+        client.log +="  \  *))  *  .'\n"
+        client.log +="   '-.((*_.-'\n"
     else:
         client.do_send({'speak': myname, 'txt': to_send})
 

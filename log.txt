@@ -1,0 +1,32 @@
+CHAT LOG:
+Agent hi said: heyy
+Client said: hi
+Client said: hi
+Agent hi said: 
+Client said: ka
+Client said: :s
+Client said: :e
+      ___ 
+   .-*)) `*-.
+  /*  ((*   *'.
+ |   *))  *   *\ 
+ | *  ((*   *  /
+  \  *))  *  .'
+   '-.((*_.-'
+Client said: :e
+      ___ 
+   .-*)) `*-.
+  /*  ((*   *'.
+ |   *))  *   *\ 
+ | *  ((*   *  /
+  \  *))  *  .'
+   '-.((*_.-'
+Client said: :e
+      ___ 
+   .-*)) `*-.
+  /*  ((*   *'.
+ |   *))  *   *\ 
+ | *  ((*   *  /
+  \  *))  *  .'
+   '-.((*_.-'
+Client said: :s
