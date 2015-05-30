@@ -3,12 +3,12 @@ import sys
 from threading import Thread
 from time import sleep
 
-
+########MODEL########
 myname = raw_input('What is your name? ')
 options = raw_input('What do you need help with? 1) Question, 2) Complaint, 3) Return \n')
-if options == "1":
+if options == 1:
     topic = raw_input('What is your question? ')
-elif options == "2":
+elif options == 2:
     topic = raw_input('What is the complaint? ')
 else:
     topic = raw_input('What would you like to return? ')
@@ -59,21 +59,9 @@ while 1:
         logFile.write(client.log)
         logFile.close()
     elif(to_send==":e"):
-        print"      ___ "
-        print"   .-*)) `*-."
-        print"  /*  ((*   *'."
-        print" |   *))  *   *\ "
-        print" | *  ((*   *  /"
-        print"  \  *))  *  .'"
-        print"   '-.((*_.-'"
-
-        client.log +="      ___ \n"
-        client.log +="   .-*)) `*-.\n"
-        client.log +="  /*  ((*   *'.\n"
-        client.log +=" |   *))  *   *\ \n"
-        client.log +=" | *  ((*   *  /\n"
-        client.log +="  \  *))  *  .'\n"
-        client.log +="   '-.((*_.-'\n"
+        egg ="      ___ \n   .-*)) `*-.\n  /*  ((*   *'.\n |   *))  *   *\ \n | *  ((*   *  /\n  \  *))  *  .'\n   '-.((*_.-'\n"
+        client.log += egg
+        print egg
     else:
         client.do_send({'speak': myname, 'txt': to_send})
 
