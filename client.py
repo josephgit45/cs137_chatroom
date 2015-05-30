@@ -6,6 +6,12 @@ from time import sleep
 
 myname = raw_input('What is your name? ')
 options = raw_input('What do you need help with? 1) Question, 2) Complaint, 3) Return \n')
+if options == 1:
+    topic = raw_input('What is your question? ')
+elif options == 2:
+    topic = raw_input('What is the complaint? ')
+else:
+    topic = raw_input('What would you like to return? ')
 
 class Client(Handler):
     
@@ -13,17 +19,18 @@ class Client(Handler):
         if 'join' in msg:
             self.log += "Agent " + msg['join'] + " has joined.\n"
             print "Agent " + msg['join'] + " has joined."
+            client.do_send({'join': myname, 'option': options, 'topic': topic})
         elif 'txt' in msg:
             self.log += "Agent " + msg['speak'] + " said: " + msg['txt'] + "\n"
             print "Agent " + msg['speak'] + " said: " + msg['txt']
         else:
             print "Agent is busy. Please wait."
         
-host, port = '192.168.43.103', 8888
+host, port = 'localhost', 8888
 client = Client(host, port)
     #while not client.connected:  # poll until connected
 #    sleep(0.05)
-client.do_send({'join': myname, 'option': options})
+client.do_send({'join': myname, 'option': options, 'topic': topic})
 
 def periodic_poll():
     while 1:

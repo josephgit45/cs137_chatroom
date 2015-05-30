@@ -20,6 +20,8 @@ class MyHandler(Handler):
                     c.do_send(msg)
                 elif 'quit' in msg.keys() and c is self:
                     print msg['speak'] + " user left."
+                    if len(clients) > 2:
+                        clients[2].do_send({'join': ""})
                     clients.remove(c)
                     break
         else:
