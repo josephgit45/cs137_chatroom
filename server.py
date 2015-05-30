@@ -23,7 +23,6 @@ class MyHandler(Handler):
                     if len(clients) > 2:
                         clients[2].do_send({'join': ""})
                     clients.remove(c)
-                    break
         else:
             self.do_send({'busy': "Please wait."})
 

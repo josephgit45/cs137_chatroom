@@ -17,6 +17,9 @@ print "Connecting you to an agent."
 
 class Client(Handler):
     
+    def on_close(self):
+        print "Goodbye."
+    
     def on_msg(self, msg):
         if 'join' in msg:
             self.log += "Agent " + msg['join'] + " has joined.\n"
@@ -48,7 +51,6 @@ while 1:
     client.log += "Client said: " + to_send + "\n"
     if(to_send==":q"):
         client.do_send({'speak': myname, 'quit': to_send})
-        print "Goodbye."
         client.do_close()
     elif(to_send==":s"):
         print "Saving to log.txt file"
