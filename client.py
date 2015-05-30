@@ -4,7 +4,7 @@ from threading import Thread
 from time import sleep
 
 
-myname = raw_input('What is your name, imbecile? ')
+myname = raw_input('What is your name? ')
 options = raw_input('What do you need help with? 1) Question, 2) Complaint, 3) Return \n')
 
 class Client(Handler):
@@ -17,7 +17,7 @@ class Client(Handler):
             self.log += "Agent " + msg['speak'] + " said: " + msg['txt'] + "\n"
             print "Agent " + msg['speak'] + " said: " + msg['txt']
         
-host, port = '172.20.10.4', 8888
+host, port = '192.168.43.103', 8888
 client = Client(host, port)
     #while not client.connected:  # poll until connected
 #    sleep(0.05)
